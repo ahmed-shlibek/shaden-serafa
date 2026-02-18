@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "devDependencies": {
+    "laravel-nova-devtool": "file:vendor/laravel/nova-devtool"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.1"
+  }
+}
