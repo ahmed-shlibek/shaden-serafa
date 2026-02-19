@@ -1,8 +1,7 @@
 <template>
     <div class="px-3 py-3 bg-gray-200">
         <div class="flex items-center justify-between mb-2">
-            <h3 class="text-base font-bold">قيمة المشتريات</h3>
-            <span class="text-xs text-gray-500">آخر 15 أيام (USD)</span>
+            <h3 class="text-base font-bold">{{__("Purchase Amount")}}</h3>
         </div>
 
         <div v-if="error" class="text-sm text-red-600 mb-2">
@@ -83,19 +82,19 @@ export default {
                     labels: this.labels,
                     datasets: [
                         {
-                            label: 'القيمة المطلوبة (USD)',
+                            label: this.__("Requested Amount (USD)"),
                             data: this.requested,
                             tension: 0.35,
                             fill: false,
                         },
                         {
-                            label: 'القيمة المعتمدة (USD)',
+                            label: this.__("Approved Amount (USD)"),
                             data: this.approved,
                             tension: 0.35,
                             fill: false,
                         },
                         {
-                            label: 'القيمة المتبقية (USD)',
+                            label: this.__("Remaining Amount (USD)"),
                             data: this.remaining,
                             tension: 0.35,
                             fill: false,

@@ -1,7 +1,7 @@
 <template>
     <div class="px-3 py-3 bg-gray-200">
         <div class="flex items-center justify-between mb-2">
-            <h3 class="text-base font-bold">معاملات الشراء</h3>
+            <h3 class="text-base font-bold">{{__("Purchase transactions")}}</h3>
         </div>
 
         <div v-if="error" class="text-sm text-red-600 mb-2">
@@ -82,19 +82,19 @@ export default {
                     labels: this.labels,
                     datasets: [
                         {
-                            label: 'ألإجمالي',
+                            label: this.__("Total"),
                             data: this.requested,
                             tension: 0.35,
                             fill: false,
                         },
                         {
-                            label: 'المعتمد',
+                            label: this.__("Approved"),
                             data: this.approved,
                             tension: 0.35,
                             fill: false,
                         },
                         {
-                            label: 'الباقي',
+                            label: this.__("The Rest"),
                             data: this.remaining,
                             tension: 0.35,
                             fill: false,

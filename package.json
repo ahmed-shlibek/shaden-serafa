@@ -16,7 +16,9 @@
         "build-purchase-value": "cd nova-components/PurchaseValue && npm run dev",
         "build-purchase-value-prod": "cd nova-components/PurchaseValue && npm run prod",
         "build-purchase-transactions": "cd nova-components/PurchaseTransactions && npm run dev",
-        "build-purchase-transactions-prod": "cd nova-components/PurchaseTransactions && npm run prod"
+        "build-purchase-transactions-prod": "cd nova-components/PurchaseTransactions && npm run prod",
+        "build-language-switcher": "cd nova-components/LanguageSwitcher && npm run dev",
+        "build-language-switcher-prod": "cd nova-components/LanguageSwitcher && npm run prod"
     },
     "devDependencies": {
         "@eslint/js": "^9.19.0",

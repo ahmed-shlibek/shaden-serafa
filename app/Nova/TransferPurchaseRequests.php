@@ -23,6 +23,11 @@ class TransferPurchaseRequests extends Resource
      */
     public static $title = 'id';
 
+    public static function label()
+    {
+        return __('Transfer Purchase Requests');
+    }
+
     /**
      * The columns that should be searched.
      *

@@ -28,7 +28,8 @@ class PurchasesSummaryController extends Controller
         if ($tab === 'type') {
             $labelExpr = "
                 CASE
-                    WHEN TRIM($colSql) IN ('Card', 'بطاقة') THEN 'بطاقة'
+                    WHEN TRIM($colSql) IN ('Card', 'بطاقة') THEN 'Card'
+                    WHEN TRIM($colSql) = 'الإيداع بحساب العملة الأجنبية' THEN 'Deposit in foreign currency account'
                     ELSE $colSql
                 END
         ";
@@ -39,7 +40,11 @@ class PurchasesSummaryController extends Controller
         $rows = $query->selectRaw("$labelExpr AS label, COUNT(*) AS value")
             ->groupBy('label')
             ->orderByDesc('value')
-            ->get();
+            ->get()
+            ->map(fn ($row) => [
+                'label' => __($row->label),
+                'value' => $row->value,
+            ]);
 
         return response()->json([
             'tab' => $tab,

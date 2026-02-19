@@ -14,6 +14,12 @@ class Main extends Dashboard
      *
      * @return array<int, \Laravel\Nova\Card>
      */
+
+    public function label(): string
+    {
+        return __('Main');
+    }
+
     public function cards(): array
     {
         return [

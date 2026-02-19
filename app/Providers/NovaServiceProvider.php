@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Nova\Company;
-use App\Models\Company as CompanyModel;
 use App\Models\User;
 use App\Nova\Dashboards\Main;
 use App\Nova\TransferPurchaseRequests;
@@ -24,11 +22,26 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
 
+        Nova::withBreadcrumbs();
+
+        Nova::userLocale(function () {
+            return match (app()->getLocale()) {
+                'en' => 'en-US',
+                'ar' => 'ar-LY',
+            };
+        });
+
+        Nova::serving(function () {
+            if (str_starts_with(app()->getLocale(), 'ar')) {
+                Nova::enableRTL();
+            }
+        });
+
         Nova::mainMenu(function (Request $request) {
             return [
                 MenuSection::dashboard(Main::class)->icon('chart-bar'),
 
-                MenuSection::make('Orders', [
+                MenuSection::make(__('Orders'), [
                     MenuItem::resource(TransferPurchaseRequests::class),
                 ]),
             ];

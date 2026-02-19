@@ -1,11 +1,11 @@
 <template>
     <div class="px-3 py-3 bg-gray-200">
-        <h3 class="text-base font-bold mb-3">طلبات الشراء</h3>
+        <h3 class="text-base font-bold mb-3">{{__("Purchase Requests")}}</h3>
 
         <div class="flex gap-2 mb-3">
-            <button class="btn" :class="{active: tab==='type'}" @click="setTab('type')">حسب النوع</button>
-            <button class="btn" :class="{active: tab==='payment'}" @click="setTab('payment')">حسب نوع الدفع</button>
-            <button class="btn" :class="{active: tab==='cbl'}" @click="setTab('cbl')">حسب حالة CBL</button>
+            <button class="btn" :class="{active: tab==='type'}" @click="setTab('type')">{{__("By Type")}}</button>
+            <button class="btn" :class="{active: tab==='payment'}" @click="setTab('payment')">{{__("By Payment Type")}}</button>
+            <button class="btn" :class="{active: tab==='cbl'}" @click="setTab('cbl')">{{__('By Cbl State')}}</button>
         </div>
 
         <div class="relative flex items-center justify-center">
