@@ -16,7 +16,9 @@
         "laravel/tinker": "^2.10.1",
         "laravel/wayfinder": "^0.1.9",
         "laravel/nova": "^5.0",
-        "shaden-serafa/purchases-summary": "@dev"
+        "shaden-serafa/purchases-summary": "@dev",
+        "shaden-serafa/purchase-value": "@dev",
+        "shaden-serafa/purchase-transactions": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -112,6 +114,14 @@
         {
             "type": "path",
             "url": "./nova-components/PurchasesSummary"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/PurchaseValue"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/PurchaseTransactions"
         }
     ]
 }

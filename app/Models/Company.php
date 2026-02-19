@@ -10,6 +10,7 @@ class Company extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'api_created_at' => 'datetime',
     ];
 
     public $incrementing = false;

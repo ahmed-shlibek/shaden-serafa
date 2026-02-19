@@ -2,8 +2,10 @@
 
 namespace App\Nova\Dashboards;
 
-use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Dashboards\Main as Dashboard;
+use ShadenSerafa\PurchasesSummary\PurchasesSummary;
+use ShadenSerafa\PurchaseTransactions\PurchaseTransactions;
+use ShadenSerafa\PurchaseValue\PurchaseValue;
 
 class Main extends Dashboard
 {
@@ -15,7 +17,9 @@ class Main extends Dashboard
     public function cards(): array
     {
         return [
-            new Help,
+            (new PurchasesSummary)->width('1/3'),
+            (new PurchaseValue)->width('2/3'),
+            (new PurchaseTransactions)->width('full'),
         ];
     }
 }

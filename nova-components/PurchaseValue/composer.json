@@ -1,5 +1,5 @@
 {
-    "name": "shaden-serafa/purchases-summary",
+    "name": "shaden-serafa/purchase-value",
     "description": "A Laravel Nova card.",
     "keywords": [
         "laravel",
@@ -12,20 +12,20 @@
     },
     "require-dev": {
         "laravel/nova": "^5.0",
-        "laravel/nova-devtool": "^1.8"
+        "laravel/nova-devtool": "^1.7"
     },
     "repositories": [
         { "type": "composer", "url": "https://nova.laravel.com" }
     ],
     "autoload": {
         "psr-4": {
-            "ShadenSerafa\\PurchasesSummary\\": "src/"
+            "ShadenSerafa\\PurchaseValue\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "ShadenSerafa\\PurchasesSummary\\CardServiceProvider"
+                "ShadenSerafa\\PurchaseValue\\CardServiceProvider"
             ]
         }
     },

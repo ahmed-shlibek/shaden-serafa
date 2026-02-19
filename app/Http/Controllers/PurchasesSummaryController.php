@@ -9,13 +9,13 @@ class PurchasesSummaryController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $tab = $request->string('tab')->toString() ?: 'type';
+        $tab = $request->string('tab')->toString();
+        $tab = in_array($tab, ['type', 'payment', 'cbl'], true) ? $tab : 'type';
 
         $column = match ($tab) {
             'type' => 'type_name',
             'payment' => 'payment_type',
             'cbl' => 'state_code',
-            default => 'type_name',
         };
 
         $query = PurchaseRequests::query()
@@ -23,15 +23,17 @@ class PurchasesSummaryController extends Controller
             ->whereNotNull($column)
             ->where($column, '!=', '');
 
+        $colSql = "`{$column}`";
+
         if ($tab === 'type') {
             $labelExpr = "
-        CASE
-            WHEN LOWER(TRIM($column)) IN ('Card', 'بطاقة') THEN 'بطاقة'
-            ELSE $column
-        END
+                CASE
+                    WHEN TRIM($colSql) IN ('Card', 'بطاقة') THEN 'بطاقة'
+                    ELSE $colSql
+                END
         ";
         } else {
-            $labelExpr = $column;
+            $labelExpr = $colSql;
         }
 
         $rows = $query->selectRaw("$labelExpr AS label, COUNT(*) AS value")

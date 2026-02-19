@@ -4,6 +4,8 @@ namespace App\Nova;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 use ShadenSerafa\PurchasesSummary\PurchasesSummary;
+use ShadenSerafa\PurchaseTransactions\PurchaseTransactions;
+use ShadenSerafa\PurchaseValue\PurchaseValue;
 
 class Company extends Resource
 {
@@ -47,9 +49,7 @@ class Company extends Resource
      */
     public function cards(NovaRequest $request): array
     {
-        return [
-            new PurchasesSummary()
-        ];
+        return [];
     }
 
     /**

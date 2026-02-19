@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6089c1d509cc2f7b95e411e8d7193e7b",
+    "content-hash": "cce23504698129c5bc50f2da56899e79",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -4301,12 +4301,12 @@
             "time": "2025-02-18T12:50:31+00:00"
         },
         {
-            "name": "shaden-serafa/purchases-summary",
+            "name": "shaden-serafa/purchase-transactions",
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "./nova-components/PurchasesSummary",
-                "reference": "2d5508d45e68cfeebd7f42ed3aaed63a289b1456"
+                "url": "./nova-components/PurchaseTransactions",
+                "reference": "1749614bbc1df63f6ef2dd06a3a647e558f1b46a"
             },
             "require": {
                 "illuminate/support": "^10.0|^11.0|^12.0",
@@ -4315,6 +4315,88 @@
             "require-dev": {
                 "laravel/nova": "^5.0",
                 "laravel/nova-devtool": "^1.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ShadenSerafa\\PurchaseTransactions\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ShadenSerafa\\PurchaseTransactions\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova card.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "shaden-serafa/purchase-value",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/PurchaseValue",
+                "reference": "2e0a96ebc6dd549ddeec94e5fcf509972e6d7550"
+            },
+            "require": {
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/nova": "^5.0",
+                "laravel/nova-devtool": "^1.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ShadenSerafa\\PurchaseValue\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ShadenSerafa\\PurchaseValue\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova card.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "shaden-serafa/purchases-summary",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/PurchasesSummary",
+                "reference": "b6893e8a78098a4b9d3fa7a63e101d892ba9e20c"
+            },
+            "require": {
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/nova": "^5.0",
+                "laravel/nova-devtool": "^1.8"
             },
             "type": "library",
             "extra": {
@@ -10518,6 +10600,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "shaden-serafa/purchase-transactions": 20,
+        "shaden-serafa/purchase-value": 20,
         "shaden-serafa/purchases-summary": 20
     },
     "prefer-stable": true,
@@ -10526,5 +10610,5 @@
         "php": "^8.2"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }

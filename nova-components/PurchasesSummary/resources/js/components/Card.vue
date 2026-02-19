@@ -1,30 +1,5 @@
-<!--<template>-->
-<!--  <Card class="flex flex-col items-center justify-center">-->
-<!--    <div class="px-3 py-3">-->
-<!--      <h1 class="text-center text-3xl text-gray-500 font-light">Purchases Summary</h1>-->
-<!--    </div>-->
-<!--  </Card>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--export default {-->
-<!--  props: [-->
-<!--    'card',-->
-
-<!--    // The following props are only available on resource detail cards...-->
-<!--    // 'resource',-->
-<!--    // 'resourceId',-->
-<!--    // 'resourceName',-->
-<!--  ],-->
-
-<!--  mounted() {-->
-<!--    //-->
-<!--  },-->
-<!--}-->
-<!--</script>-->
-
 <template>
-    <div class="px-3 py-3">
+    <div class="px-3 py-3 bg-gray-200">
         <h3 class="text-base font-bold mb-3">طلبات الشراء</h3>
 
         <div class="flex gap-2 mb-3">

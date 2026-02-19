@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Nova\Company;
 use App\Models\Company as CompanyModel;
 use App\Models\User;
+use App\Nova\Dashboards\Main;
 use App\Nova\TransferPurchaseRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -24,14 +25,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         parent::boot();
 
         Nova::mainMenu(function (Request $request) {
-            $companies = CompanyModel::query()
-                ->orderBy('name')
-                ->get(['name']);
-
             return [
-                MenuSection::make('Companies', $companies->map(function ($c) {
-                    return MenuItem::link($c->name, '/resources/companies/'.$c->id);
-                })->all())->icon('office-building')->collapsable(),
+                MenuSection::dashboard(Main::class)->icon('chart-bar'),
 
                 MenuSection::make('Orders', [
                     MenuItem::resource(TransferPurchaseRequests::class),

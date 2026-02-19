@@ -12,7 +12,11 @@
         "build-PurchasesSummary": "cd nova-components/PurchasesSummary && npm run dev",
         "build-PurchasesSummary-prod": "cd nova-components/PurchasesSummary && npm run prod",
         "build-purchases-summary": "cd nova-components/PurchasesSummary && npm run dev",
-        "build-purchases-summary-prod": "cd nova-components/PurchasesSummary && npm run prod"
+        "build-purchases-summary-prod": "cd nova-components/PurchasesSummary && npm run prod",
+        "build-purchase-value": "cd nova-components/PurchaseValue && npm run dev",
+        "build-purchase-value-prod": "cd nova-components/PurchaseValue && npm run prod",
+        "build-purchase-transactions": "cd nova-components/PurchaseTransactions && npm run dev",
+        "build-purchase-transactions-prod": "cd nova-components/PurchaseTransactions && npm run prod"
     },
     "devDependencies": {
         "@eslint/js": "^9.19.0",

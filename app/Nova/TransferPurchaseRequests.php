@@ -30,6 +30,7 @@ class TransferPurchaseRequests extends Resource
      */
     public static $search = [
         'id',
+        'user_full_name',
     ];
 
     /**
