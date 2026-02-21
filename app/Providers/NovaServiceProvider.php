@@ -46,6 +46,18 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ]),
             ];
         });
+
+        Nova::userMenu(function (Request $request, \Laravel\Nova\Menu\Menu $menu) {
+            $current = app()->getLocale();
+            $target = $current === 'ar' ? 'en' : 'ar';
+            $label = $current === 'ar' ? 'English' : 'العربية';
+
+            $menu->prepend(
+                MenuItem::externalLink($label, route('locale.switch', $target))
+            );
+
+            return $menu;
+        });
     }
 
     /**

@@ -13,25 +13,22 @@ class PurchaseTransactionsController extends Controller
         $to = now()->endOfDay();
 
         $totalsByDay = PurchaseRequests::query()
-            ->where('is_deleted', 0)
-            ->whereIn('currency_code', ['USD', 'LYD'])
-            ->where(function ($query) use ($from, $to) {
-                $query->whereBetween('created_at', [$from, $to])
-                    ->orWhereBetween('api_created_at', [$from, $to]);
-            })
+            ->active()
+            ->withCurrency()
+            ->inDateRange($from, $to)
             ->selectRaw("
                 DATE_FORMAT(COALESCE(api_created_at, created_at), '%Y-%m-%d') as date,
 
-                COUNT(amount_requested) as total,
+                COUNT(amount_requested) as total_transactions,
 
-                COUNT(cbl_flag) as cbl_flag,
+                COUNT(cbl_flag) as with_cbl_flag,
 
                 SUM(
                     CASE
                         WHEN cbl_flag IS NULL THEN 1
                         ELSE 0
                     END
-                ) as cbl_flag_null
+                ) as without_cbl_flag
             ")
             ->groupByRaw('date')
             ->orderBy('date')
@@ -39,9 +36,9 @@ class PurchaseTransactionsController extends Controller
             ->keyBy('date');
 
         $labels = [];
-        $requested = [];
-        $approved = [];
-        $remaining = [];
+        $totalTransactions = [];
+        $withCblFlag = [];
+        $withoutCblFlag = [];
 
         $period = \Carbon\CarbonPeriod::create($from, '1 day', $to);
 
@@ -49,16 +46,16 @@ class PurchaseTransactionsController extends Controller
             $dateString = $date->toDateString();
 
             $labels[] = $dateString;
-            $requested[] = (float) ($totalsByDay[$dateString]->total ?? 0);
-            $approved[] = (float) ($totalsByDay[$dateString]->cbl_flag ?? 0);
-            $remaining[] = (float) ($totalsByDay[$dateString]->cbl_flag_null ?? 0);
+            $totalTransactions[] = (int) ($totalsByDay[$dateString]->total_transactions ?? 0);
+            $withCblFlag[] = (int) ($totalsByDay[$dateString]->with_cbl_flag ?? 0);
+            $withoutCblFlag[] = (int) ($totalsByDay[$dateString]->without_cbl_flag ?? 0);
         }
 
         return response()->json([
             'labels' => $labels,
-            'requested' => $requested,
-            'approved' => $approved,
-            'remaining' => $remaining,
+            'requested' => $totalTransactions,
+            'approved' => $withCblFlag,
+            'remaining' => $withoutCblFlag,
         ]);
     }
 }

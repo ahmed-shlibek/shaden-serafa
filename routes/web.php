@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\PurchasesSummaryController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -15,5 +14,8 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/settings.php';
+use App\Http\Controllers\LocaleController;
 
+Route::get('locale/{locale}', LocaleController::class)->name('locale.switch');
+
+require __DIR__.'/settings.php';

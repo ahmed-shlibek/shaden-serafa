@@ -13,18 +13,15 @@ class PurchaseValueController extends Controller
         $to = now()->endOfDay();
 
         $totalsByDay = PurchaseRequests::query()
-            ->where('is_deleted', 0)
-            ->whereIn('currency_code', ['USD', 'LYD'])
-            ->where(function ($query) use ($from, $to) {
-                $query->whereBetween('created_at', [$from, $to])
-                    ->orWhereBetween('api_created_at', [$from, $to]);
-            })
+            ->active()
+            ->withCurrency()
+            ->inDateRange($from, $to)
             ->selectRaw("
                 DATE_FORMAT(COALESCE(api_created_at, created_at), '%Y-%m-%d') as date,
 
                 SUM(
                     CASE
-                        WHEN currency_code = 'LYD' THEN amount_requested / COALESCE(bank_transfer_price, 1)
+                        WHEN currency_code = 'LYD' THEN amount_requested / COALESCE(NULLIF(bank_transfer_price, 0), 1)
                         ELSE amount_requested
                     END
                 ) as total_amount,
@@ -32,14 +29,14 @@ class PurchaseValueController extends Controller
                 COALESCE(SUM(
                     CASE
                         WHEN currency_code = 'LYD'
-                                THEN COALESCE(deduct_lyd_amount, 0) / COALESCE(bank_transfer_price, 1)
+                                THEN COALESCE(deduct_lyd_amount, 0) / COALESCE(NULLIF(bank_transfer_price, 0), 1)
                         ELSE COALESCE(deduct_lyd_amount, 0)
                     END
                 ), 0) as approved_total,
 
                 COALESCE(SUM(
                     CASE
-                        WHEN currency_code = 'LYD' THEN amount_requested / COALESCE(bank_transfer_price, 1) - COALESCE(deduct_lyd_amount, 0) / COALESCE(bank_transfer_price, 1)
+                        WHEN currency_code = 'LYD' THEN amount_requested / COALESCE(NULLIF(bank_transfer_price, 0), 1) - COALESCE(deduct_lyd_amount, 0) / COALESCE(NULLIF(bank_transfer_price, 0), 1)
                         ELSE amount_requested - COALESCE(deduct_lyd_amount, 0)
                     END
                 ), 0) as remaining_value
